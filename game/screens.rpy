@@ -98,17 +98,25 @@ style frame:
 screen say(who, what):
     style_prefix "say"
 
-    window:
-        id "window"
+    if who is not None:
+        frame:
+            xalign 0.0
+            yalign 0.0
+            xmaximum gui.speech_bubble_maxwidth
+            xpos gui.speech_bubble_xpos
+            ypos gui.speech_bubble_ypos
+            xpadding gui.speech_bubble_xpadding
+            ypadding gui.speech_bubble_ypadding
 
-        if who is not None:
-
-            window:
-                id "namebox"
-                style "namebox"
-                text who id "who"
-
-        text what id "what"
+            text what id "what" :
+                xalign 0.0
+                yalign 0.0
+                justify True
+    
+    else :
+        window:
+            id "window"
+            text what id "what"
 
 
     ## Si il y a une side image, l'afficher au-dessus du texte. Ne pas

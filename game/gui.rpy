@@ -295,7 +295,7 @@ define gui.main_menu_text_xalign = 1.0
 ## pas présents.
 
 ## Frames génériques.
-define gui.frame_borders = Borders(6, 6, 6, 6)
+define gui.frame_borders = Borders(25, 25, 25, 25)
 
 ## Le cadre qui est utilisé par les écrans de confirmation.
 define gui.confirm_frame_borders = Borders(60, 60, 60, 60)
@@ -490,3 +490,14 @@ init python:
 
         gui.nvl_button_width = 1860
         gui.nvl_button_xpos = 30
+
+
+###############################################
+# Custom gui
+###############################################
+
+define gui.speech_bubble_xpos = 200
+define gui.speech_bubble_ypos = 170
+define gui.speech_bubble_maxwidth = 600
+define gui.speech_bubble_xpadding = 30
+define gui.speech_bubble_ypadding = 20
