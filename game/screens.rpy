@@ -98,6 +98,7 @@ style frame:
 screen say(who, what):
     style_prefix "say"
 
+    # Affiche une bulle de dialogue si ce n'est pas le protagoniste qui parle
     if who is not None:
         frame:
             xalign 0.0
@@ -112,17 +113,18 @@ screen say(who, what):
                 xalign 0.0
                 yalign 0.0
                 justify True
+
+        window id "window"  # Nécessaire pour afficher le layout de dialogue
     
+    # Affiche dans la boite de dialogue si c'est le protagoniste qui parle 
     else :
         window:
             id "window"
-            text what id "what"
+            text what id "what" :
+                yalign 0.5
 
-
-    ## Si il y a une side image, l'afficher au-dessus du texte. Ne pas
-    ## l'afficher sur la version téléphone - pas assez de place.
-    if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+    # Affiche l'image du protagoniste dans la boite de dialogue
+    add gui.profil_picture xalign 0.035 yalign 1.0
 
 
 ## Rendre la boîte du nom personnalisable à travers l'objet Character.
