@@ -2,4 +2,7 @@ game/cache/*
 game/saves/*
 .vs/*
 log.txt
+*.rpyc
+*.rpyb
+*.rpymc
 
