@@ -1527,3 +1527,42 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+###############################################
+# Custom screens
+###############################################
+
+# Onglets Objectifs / Ville / Relations / Paramètres
+screen tabs_interface():
+    zorder 8
+    imagebutton auto "gui/tabs/quests_%s.png" :
+        hovered Show("tab_quests")
+        unhovered Hide("tab_quests")
+        action NullAction()
+        xpos 0.01
+    imagebutton auto "gui/tabs/city_%s.png" action [Hide("tabs_interface"), Show("tab_city")] :
+        xpos 0.1
+    #imagebutton auto "gui/tabs/relationship_%s.png" action [Hide("tabs_interface"), Show("tab_relationship")] :
+    imagebutton auto "gui/tabs/relationship_%s.png" action NullAction() :
+        xpos 0.19
+    imagebutton auto "gui/tabs/preferences_%s.png" action ShowMenu("preferences") :
+        xpos 0.9
+
+screen tab_quests :
+    frame:
+        xpos 0.01
+        ypos 0.17
+        background Frame("gui/tabs/frame_quests.png", 151, 50, 25, 50)
+        text "- Rencontrer quelqu'un"
+
+screen tab_city :
+    modal True
+
+    imagebutton idle "bg ville" action NullAction()
+    imagebutton auto "gui/tabs/return_%s.png" action [Hide("tab_city"), Show("tabs_interface")] :
+        xpos 0.01
+
+screen tab_relationship :
+    modal True
+
+    imagebutton idle "bg relations" action [Hide("tab_relationship"), Show("tabs_interface")]

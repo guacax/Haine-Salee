@@ -10,7 +10,12 @@ define e = Character('Eileen', color="#c8ffc8")
 # Le jeu commence ici
 label start:
 
+    # Affiche les onglets (je n'arrive pas à les charger autre part qu'ici)
+    show screen tabs_interface
+
     scene bg lycee exterieur
+
+    show armin
 
     "Vous venez de créer un nouveau jeu Ren'Py."
 
