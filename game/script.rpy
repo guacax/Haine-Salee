@@ -3,8 +3,7 @@
 # Déclarez sous cette ligne les images, avec l'instruction 'image'
 # ex: image eileen heureuse = "eileen_heureuse.png"
 
-# Déclarez les personnages utilisés dans le jeu.
-define e = Character('Eileen', color="#c8ffc8")
+
 transform center_right:
     pos (0.9,0.5)
 init python:
@@ -28,36 +27,46 @@ label start:
 
     scene bg lycee exterieur
 
-    "Début du jeu"
-
     show armin
     $ show_love(characters_love["armin"])
     
-
-    e "Bonjour"
-
-    "Hello."
-
     menu:
-        "Répondre gentiement":
+        "Bonjour"
+        "Salut !":
             jump armin_content
 
-        "Répondre pas gentiement":
+        "(Bousculer Armin)":
             jump armin_neutre
     
     label armin_content:
-        $ update_love("armin", characters_love["armin"], -10)
-        "Sympa"
+        $ update_love("armin", characters_love["armin"], 0)
+        menu:
+            "Comment vas-tu ?"
+            "Vous savez, je ne crois pas qu'il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres":
+                pass
+            "Ça va":
+                pass
         jump suite
         
 
     label armin_neutre:
-        $ update_love("armin", characters_love["armin"], 0)
-        "Hein"
+        $ update_love("armin", characters_love["armin"], -10)
+        menu:
+            "Hein"
+            "(Partir en riant)":
+                pass
+            "(Partir comme si de rien n'était)":
+                pass
         jump suite
 
 label suite:
-    "cool"
+    
+    hide armin
+    $ hide_love(characters_love["armin"])
+
+    menu:
+        "(Fin de la démo)":
+            pass
 
         
 

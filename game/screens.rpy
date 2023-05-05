@@ -98,33 +98,19 @@ style frame:
 screen say(who, what):
     style_prefix "say"
 
-    # Affiche une bulle de dialogue si ce n'est pas le protagoniste qui parle
-    if who is not None:
-        frame:
+    frame:
+        xalign 0.0
+        yalign 0.0
+        xmaximum gui.speech_bubble_maxwidth
+        xpos gui.speech_bubble_xpos
+        ypos gui.speech_bubble_ypos
+        xpadding gui.speech_bubble_xpadding
+        ypadding gui.speech_bubble_ypadding
+
+        text what id "what" :
             xalign 0.0
             yalign 0.0
-            xmaximum gui.speech_bubble_maxwidth
-            xpos gui.speech_bubble_xpos
-            ypos gui.speech_bubble_ypos
-            xpadding gui.speech_bubble_xpadding
-            ypadding gui.speech_bubble_ypadding
-
-            text what id "what" :
-                xalign 0.0
-                yalign 0.0
-                justify True
-
-        window id "window"  # Nécessaire pour afficher le layout de dialogue
-    
-    # Affiche dans la boite de dialogue si c'est le protagoniste qui parle 
-    else :
-        window:
-            id "window"
-            text what id "what" :
-                yalign 0.5
-
-    # Affiche l'image du protagoniste dans la boite de dialogue
-    add gui.profil_picture xalign 0.035 yalign 1.0
+            justify True
 
 
 ## Rendre la boîte du nom personnalisable à travers l'objet Character.
@@ -218,27 +204,49 @@ style input:
 screen choice(items):
     style_prefix "choice"
 
-    vbox:
-        for i in items:
-            textbutton i.caption action i.action
+    # Calcul la taille que feront les boutons pour placer correctement la textbox
+    $ buttons_height = (len(items)-1) * gui.choice_spacing + 2 * gui.choice_ypadding
+    for i,it in enumerate(items) :
+        $ button_object = Button(Text(it.caption))
+        $ button_render = renpy.render(button_object, gui.dialogue_width, gui.textbox_height, 0, 0)
+        $ buttons_height += button_render.get_size()[1]
 
+    # Affiche les différents choix 
+    window :
+        id "window" # Permet d'appeler le screen say
+        ypos config.screen_height + gui.textbox_height - int(buttons_height)
+        vbox:
+            for i,it in enumerate(items):
+                button action it.action:
+                    hbox :
+                        text (chr(65+i)+". ") style "choice_text_prefix"
+                        text it.caption
+
+    # Affiche l'image de pofil
+    add "gui/profil_background.png" xalign 0.0 yalign 1.0
+    add gui.profil_picture xalign 0.035 yalign 1.0
 
 style choice_vbox is vbox
 style choice_button is button
-style choice_button_text is button_text
+style choice_text is button_text
+style choice_text_prefix is button_text
 
 style choice_vbox:
-    xalign 0.5
-    ypos 405
-    yanchor 0.5
+    xpos 295
+    ypos gui.choice_ypadding
 
     spacing gui.choice_spacing
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
 
-style choice_button_text is default:
+style choice_text is default:
     properties gui.button_text_properties("choice_button")
+
+style choice_text_prefix is default:
+    properties gui.button_text_properties("choice_button")
+    idle_color gui.choice_button_text_prefix_idle_color
+    bold True
 
 
 ## Écran des menus rapides #####################################################

@@ -100,7 +100,7 @@ define gui.game_menu_background = "gui/game_menu.png"
 ## fois.
 
 ## La hauteur de la fenêtre contenant les dialogues.
-define gui.textbox_height = 200
+define gui.textbox_height = 360
 
 ## L’emplacement vertical de la zone de texte à l’écran. 0.0 pour le haut, 0.5
 ## pour le centre et 1.0 pour le bas.
@@ -211,16 +211,17 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ## Les boutons pour les choix (Choice buttons) sont utilisés dans le jeu pour
 ## permettre au joueur de choisir telle ou telle action, tel ou tel dialogue.
 
-define gui.choice_button_width = 1185
+define gui.choice_button_width = 1625
 define gui.choice_button_height = None
 define gui.choice_button_tile = False
-define gui.choice_button_borders = Borders(150, 8, 150, 8)
+define gui.choice_button_borders = Borders(270, 8, 150, 8)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
-define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = "#cccccc"
+define gui.choice_button_text_xalign = 0.0
+define gui.choice_button_text_idle_color = "#3d3d3d"
 define gui.choice_button_text_hover_color = "#ffffff"
 define gui.choice_button_text_insensitive_color = "#444444"
+define gui.choice_button_text_prefix_idle_color = "#ff8080"
 
 
 ## Boutons des emplacements de fichiers. #######################################
@@ -267,7 +268,10 @@ define gui.skip_ypos = 15
 define gui.notify_ypos = 68
 
 ## L’espacement entre les différents choix du menu.
-define gui.choice_spacing = 33
+define gui.choice_spacing = 10
+
+## Padding vertical de la fenêtre de dialogue autour des différents choix du menu
+define gui.choice_ypadding = 30
 
 ## Boutons dans la section de navigation du menu principal et du menu de jeu.
 define gui.navigation_spacing = 6
