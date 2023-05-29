@@ -4,31 +4,18 @@
 # ex: image eileen heureuse = "eileen_heureuse.png"
 
 
-transform center_right:
-    pos (0.9,0.5)
-init python:
-    characters_love = {"armin": 50}
-    def show_love(lovelevel):
-        renpy.show(f"love {lovelevel}", [center_right])
-
-    def hide_love(lovelevel):
-        renpy.hide(f"love {lovelevel}")
-
-    def update_love(character, curr_love, change):
-        hide_love(characters_love[character])
-        characters_love[character] += change
-        show_love(characters_love[character])
-
 # Le jeu commence ici
 label start:
 
-    # Affiche les onglets (je n'arrive pas à les charger autre part qu'ici)
+    # Affiche les onglets
     show screen tabs_interface
+    # Affiche la barre de relation quand nécessaire
+    show screen relation_bar
 
     scene bg lycee exterieur
 
-    show armin
-    $ show_love(characters_love["armin"])
+    # Utiliser $ show_character("Armin") permet d'afficher la barre de relation en même temps
+    $ show_character("Armin")
     
     menu:
         "Bonjour"
@@ -39,41 +26,35 @@ label start:
             jump armin_neutre
     
     label armin_content:
-        $ update_love("armin", characters_love["armin"], 0)
+        $ update_relation(+10)
         menu:
             "Comment vas-tu ?"
             "Vous savez, je ne crois pas qu'il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres":
-                pass
+                $ update_relation(-50)
             "Ça va":
                 pass
         jump suite
         
 
     label armin_neutre:
-        $ update_love("armin", characters_love["armin"], -10)
+        $ update_relation(-10)
         menu:
             "Hein"
             "(Partir en riant)":
-                pass
+                $ update_relation(-10)
             "(Partir comme si de rien n'était)":
                 pass
         jump suite
 
 label suite:
     
-    hide armin
-    $ hide_love(characters_love["armin"])
+    menu:
+        "D'accord, c'est super"
+        "...":
+            pass
+
+    $ hide_character()
 
     menu:
         "(Fin de la démo)":
             pass
-
-        
-
-
-label end_and_reset:
-    python:
-        for char in characters_love:
-            characters_love[char] = 50  # reset tout le monde à 50
-    return
-
