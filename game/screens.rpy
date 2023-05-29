@@ -98,19 +98,20 @@ style frame:
 screen say(who, what):
     style_prefix "say"
 
-    frame:
-        xalign 0.0
-        yalign 0.0
-        xmaximum gui.speech_bubble_maxwidth
-        xpos gui.speech_bubble_xpos
-        ypos gui.speech_bubble_ypos
-        xpadding gui.speech_bubble_xpadding
-        ypadding gui.speech_bubble_ypadding
-
-        text what id "what" :
+    if what != "" :
+        frame:
             xalign 0.0
             yalign 0.0
-            justify True
+            xmaximum gui.speech_bubble_maxwidth
+            xpos gui.speech_bubble_xpos
+            ypos gui.speech_bubble_ypos
+            xpadding gui.speech_bubble_xpadding
+            ypadding gui.speech_bubble_ypadding
+
+            text what id "what" :
+                xalign 0.0
+                yalign 0.0
+                justify True
 
 
 ## Rendre la boîte du nom personnalisable à travers l'objet Character.

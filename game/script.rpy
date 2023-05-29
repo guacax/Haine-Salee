@@ -53,6 +53,13 @@ label suite:
         "...":
             pass
 
+    $ show_character("Mao")
+
+    menu:
+        "Salut, c'est Mao et je n'ai pas de barre de relation"
+        "Ok c'est cool !" :
+            pass
+
     $ hide_character()
 
     menu:
