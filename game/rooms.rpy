@@ -35,7 +35,14 @@ init python :
         renpy.hide("bg")
         current_room = None
 
-    # dict Room : (Position, Label, Chapitre)
+    '''
+    move_buttons
+        Keys : Nom de salle
+        Values :
+            tuple : position du bouton
+            string : salle de destination
+            integer : chapitre à partir duquel la salle est accessible
+    '''
     move_buttons = {
         "school_courtyard" : [
             ((1000,900),"school_main_hallway", 1)

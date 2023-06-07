@@ -209,7 +209,7 @@ screen choice(items):
     $ buttons_height = (len(items)-1) * gui.choice_spacing + 2 * gui.choice_ypadding
     for i,it in enumerate(items) :
         $ button_object = Button(Text(it.caption))
-        $ button_render = renpy.render(button_object, gui.dialogue_width, gui.textbox_height, 0, 0)
+        $ button_render = renpy.render(button_object, gui.dialogue_width-40, gui.textbox_height, 0, 0)
         $ buttons_height += button_render.get_size()[1]
 
     # Affiche les différents choix 
@@ -225,7 +225,7 @@ screen choice(items):
 
     # Affiche l'image de pofil
     add "gui/profil_background.png" xalign 0.0 yalign 1.0
-    add gui.profil_picture xalign 0.035 yalign 1.0
+    add profil_picture zoom 0.35 xanchor 0.5 xpos 0.15 yalign 1.0
 
 style choice_vbox is vbox
 style choice_button is button

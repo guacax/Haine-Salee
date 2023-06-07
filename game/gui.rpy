@@ -500,9 +500,6 @@ init python:
 # Custom gui
 ###############################################
 
-# Image de profil
-define gui.profil_picture = "salette"
-
 # Bulle de dialogue
 define gui.speech_bubble_xpos = 200
 define gui.speech_bubble_ypos = 170

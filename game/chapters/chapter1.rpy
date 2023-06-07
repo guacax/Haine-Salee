@@ -2,9 +2,11 @@ define chapter1_progression = 0
 
 label chapter1_school_courtyard :
 
-    $ show_room("school_courtyard")
+    # Affiche le fond de la salle
+    $ show_room("school_courtyard") 
 
-    if chapter1_progression == 0 :
+    # Vérifie si quelqu'un est présent au niveau de progression 0
+    if chapter1_progression == 0 : 
 
         $ show_character("Armin")
 
@@ -32,10 +34,12 @@ label chapter1_school_courtyard :
             "D'accord, c'est super"
             "...":
                 pass
-    
-        $ chapter1_progression = 1
+
+        # Fait avancer la progression
+        $ chapter1_progression = 1 
 
 
+    # Vérifie si quelqu'un est présent au niveau de progression 2
     elif chapter1_progression == 2 :
 
         $ show_character("Cassandre")
@@ -56,8 +60,8 @@ label chapter1_school_courtyard :
         
         $ chapter1_progression = 3
     
-
-    jump room_end
+    # Affiche les boutons de déplacement de la salle appelée avec show_room
+    jump room_end 
 
 
 label chapter1_school_main_hallway :
@@ -69,10 +73,10 @@ label chapter1_school_main_hallway :
         $ show_character("Nael")
 
         menu :
-            "Hé, t'es nouvelle ici ? J'ai jamais vu ta tête traîner dans les parages. T'es perdue ou quoi ?"
-            "Non, je suis nouvelle. J'essaie juste de trouver mon chemin.":
+            "Hé, t'es {0}une nouvelle{/0}{1}un nouvel{/1}{2}nouvel·le{/2} élève ici ? J'ai jamais vu ta tête traîner dans les parages. T'es perdu[e] ou quoi ?"
+            "Exactement, je m'appelle [profil_name]. J'essaie juste de trouver mon chemin.":
                 $ update_relation(5)
-            "Perdue ? Pas autant que toi dans une salle de classe, apparemment.":
+            "Perdu[e] ? Pas autant que toi dans une salle de classe, apparemment.":
                 $ update_relation(-5)
         
         menu :
